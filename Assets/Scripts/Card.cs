@@ -91,6 +91,12 @@ public class Card : MonoBehaviour
 			}
 		}
 	}
+
+	//Virtual methods can be overriden by subclass methods with the same name
+	virtual public void OnMouseUpAsButton()
+	{
+		print(name);
+	}
 }
 
 [System.Serializable]
