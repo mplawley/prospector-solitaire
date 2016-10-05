@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class Prospector : MonoBehaviour
 {
@@ -168,6 +169,9 @@ public class Prospector : MonoBehaviour
 			SetTableauFaces(); //Update tableau card face-ups
 			break;
 		}
+
+		//Check to see whether the game is over or not
+		CheckForGameOver();
 	}
 
 	//Moves the current target to the discardPile
@@ -281,5 +285,53 @@ public class Prospector : MonoBehaviour
 			}
 			cd.faceUp = fup; //Set the value on the card
 		}
+	}
+
+	//Test whether the game is over
+	void CheckForGameOver()
+	{
+		//If the tableau is empty, the game is over
+		if (tableau.Count == 0)
+		{
+			//Call GameOver() with a win
+			GameOver(true);
+			return;
+		}
+
+		//If there are still cards in the draw pile, the game's not over
+		if (drawPile.Count > 0)
+		{
+			return;
+		}
+
+		//Check for remaining valid plays
+		foreach (CardProspector cd in tableau)
+		{
+			if (AdjacentRank(cd, target))
+			{
+				//If there's a valid play, the game's not over
+				return;
+			}
+		}
+
+		//Since there are no valid plays, the game is over
+		//Call GameOver with a loss
+		GameOver(false);
+	}
+
+	//Called when the game is over. Simple for now, but expandable
+	void GameOver(bool won)
+	{
+		if (won)
+		{
+			print("Game over. You won! :)");
+		}
+		else
+		{
+			print("Game over. You lost... :(");
+		}
+
+		//Reload the scene, resetting the game
+		SceneManager.LoadScene("Scene 0");
 	}
 }
