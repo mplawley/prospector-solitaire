@@ -10,8 +10,6 @@ public class Scoreboard : MonoBehaviour
 
 	public GameObject prefabFloatingScore;
 
-	[Header("----------------")]
-
 	[SerializeField]
 	private int _score = 0;
 	public string _scoreString;
@@ -50,7 +48,7 @@ public class Scoreboard : MonoBehaviour
 		S = this;
 	}
 
-	//When called by SEndMessage, this adds the fs.score to this.score
+	//When called by SendMessage, this adds the fs.score to this.score
 	public void FSCallback(FloatingScore fs)
 	{
 		score += fs.score;

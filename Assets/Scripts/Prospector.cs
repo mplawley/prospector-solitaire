@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 //An enum to handle all the possible scoring events
 public enum ScoreEvent
@@ -46,6 +47,8 @@ public class Prospector : MonoBehaviour
 	public int scoreRun = 0;
 	public int score = 0;
 	public FloatingScore fsRun;
+	public Text GTGameOver;
+	public Text GTRoundResult;
 
 	void Awake()
 	{
@@ -62,6 +65,32 @@ public class Prospector : MonoBehaviour
 
 		//And reset the SCORE_FROM_PREVIOUS_ROUND
 		SCORE_FROM_PREVIOUS_ROUND = 0;
+
+		//Set up the Texts that show at the end of the round. Set the Text Components
+		GameObject go = GameObject.Find("GameOver");
+		if (go != null)
+		{
+			GTGameOver = go.GetComponent<Text>();
+		}
+
+		go = GameObject.Find("RoundResult");
+		if (go != null)
+		{
+			GTRoundResult = go.GetComponent<Text>();
+		}
+
+		//Make them invisible
+		ShowResultsGTs(false);
+
+		go = GameObject.Find("HighScore");
+		string hScore = "High score: " + Utils.AddCommasToNumber(HIGH_SCORE);
+		go.GetComponent<Text>().text = hScore;
+	}
+
+	void ShowResultsGTs(bool show)
+	{
+		GTGameOver.gameObject.SetActive(show);
+		GTRoundResult.gameObject.SetActive(show);
 	}
 
 	// Use this for initialization
@@ -445,22 +474,30 @@ public class Prospector : MonoBehaviour
 		switch (sEvt)
 		{
 		case ScoreEvent.gameWin:
+			GTGameOver.text = "Round Over";
 			//If it's a win, add the score to the next round. static fields are NOT reset by reloading the level
 			Prospector.SCORE_FROM_PREVIOUS_ROUND = score;
 			//print("You won this round! Round score: " + score);
+			GTRoundResult.text = "You won this round!\nRound Score: " + score;
+			ShowResultsGTs(true);
 			break;
 		case ScoreEvent.gameLoss:
+			GTGameOver.text = "Game Over";
 			//If it's a loss, check against the high score
 			if (Prospector.HIGH_SCORE <= score)
 			{
 				//print("You got the high score! High score: " + score);
+				string sRR = "You got the high score!\nHigh score: " + score;
+				GTRoundResult.text = sRR;
 				Prospector.HIGH_SCORE = score;
 				PlayerPrefs.SetInt("ProspectorHighScore", score);
 			}
 			else
 			{
 				//print("Your final score for the game was:" + score);
+				GTRoundResult.text = "Your final score was: " + score;
 			}
+			ShowResultsGTs(true);
 			break;
 		default: 
 			//print("score: " + score + " scoreRun: " + scoreRun + " chain: " + chain);
