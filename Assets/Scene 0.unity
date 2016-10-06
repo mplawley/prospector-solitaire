@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4469245, g: 0.49678475, b: 0.5750831, a: 1}
+  m_IndirectSpecularColor: {r: 0.44692492, g: 0.4967869, b: 0.57508546, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -321,6 +321,7 @@ GameObject:
   - 114: {fileID: 509118577}
   - 114: {fileID: 509118576}
   - 114: {fileID: 509118578}
+  - 114: {fileID: 509118579}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -531,6 +532,17 @@ MonoBehaviour:
   - Row3
   - Discard
   - Draw
+--- !u!114 &509118579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 509118570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc2ad7e32f4234841939ef53cd8818e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &567637926
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,7 +765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b441a4b3e74c54d5cbf686838c74f1ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabFloatingScore: {fileID: 1000013727166202, guid: cb6553808c1694a17a491561e472ee94,
+  prefabFloatingScore: {fileID: 1000010512404174, guid: cb6553808c1694a17a491561e472ee94,
     type: 2}
   _score: 0
   _scoreString: 

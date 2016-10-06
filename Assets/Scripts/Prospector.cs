@@ -22,10 +22,10 @@ public class Prospector : MonoBehaviour
 
 	public float reloadDelay = 1f; //The delay between rounds
 
-	public Vector3 fsPosMid = new Vector3(0.5f, 0.90f, 0);
+	public Vector3 fsPosMid = new Vector3(850f, 450f, 0);
 	public Vector3 fsPosRun = new Vector3(0.5f, 0.75f, 0);
 	public Vector3 fsPosMid2 = new Vector3(0.5f, 0.5f, 0);
-	public Vector3 fsPosEnd = new Vector3(1.0f, 0.65f, 0);
+	public Vector3 fsPosEnd = new Vector3(1000f, 500f, 0);
 
 	public Deck deck;
 	public TextAsset deckXML;
@@ -402,7 +402,6 @@ public class Prospector : MonoBehaviour
 		//Reload the scene in reloadDelay seconds
 		//This will give the score a moment to travel
 		Invoke("ReloadLevel", reloadDelay);
-
 	}
 
 	void ReloadLevel()
@@ -450,8 +449,8 @@ public class Prospector : MonoBehaviour
 
 			//Move it from the mousePosition to fsPosRun
 			Vector3 p0 = Input.mousePosition;
-			p0.x /= Screen.width;
-			p0.y /= Screen.height;
+			//p0.x /= Screen.width;
+			//p0.y /= Screen.height;
 			fsPts = new List<Vector3>();
 			fsPts.Add(p0);
 			fsPts.Add(fsPosMid);
