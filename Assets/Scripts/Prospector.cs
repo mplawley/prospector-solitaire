@@ -22,7 +22,7 @@ public class Prospector : MonoBehaviour
 	static public int SCORE_FROM_PREVIOUS_ROUND = 0;
 	static public int HIGH_SCORE = 0;
 
-	public float reloadDelay = 1f; //The delay between rounds
+	public float reloadDelay = 5.0f; //The delay between rounds
 
 	[Header("Bezier curve management")]
 	public Transform fsPosMidObject;
@@ -494,7 +494,7 @@ public class Prospector : MonoBehaviour
 			//If it's a win, add the score to the next round. static fields are NOT reset by reloading the level
 			Prospector.SCORE_FROM_PREVIOUS_ROUND = score;
 			//print("You won this round! Round score: " + score);
-			GTRoundResult.text = "You won this round!\nRound Score: " + score;
+			GTRoundResult.text = "You won this round! Play another to add to your score!\nRound Score: " + score;
 			ShowResultsGTs(true);
 			break;
 		case ScoreEvent.gameLoss:
@@ -516,7 +516,7 @@ public class Prospector : MonoBehaviour
 			ShowResultsGTs(true);
 			break;
 		default: 
-			print("score: " + score + " scoreRun: " + scoreRun + " chain: " + chain);
+			//print("score: " + score + " scoreRun: " + scoreRun + " chain: " + chain);
 			break;
 		}
 	}
