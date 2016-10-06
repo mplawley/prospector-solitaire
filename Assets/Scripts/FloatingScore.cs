@@ -16,6 +16,7 @@ public enum FSState
 public class FloatingScore : MonoBehaviour
 {
 	public FSState state = FSState.idle;
+
 	[SerializeField]
 	private int _score = 0; //The score field
 	public string scoreString;
