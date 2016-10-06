@@ -16,20 +16,28 @@ public enum ScoreEvent
 
 public class Prospector : MonoBehaviour
 {
+	#region Fields
+	[Header("Game flow management")]
 	static public Prospector S;
 	static public int SCORE_FROM_PREVIOUS_ROUND = 0;
 	static public int HIGH_SCORE = 0;
 
 	public float reloadDelay = 1f; //The delay between rounds
 
-	public Vector3 fsPosMid = new Vector3(850f, 450f, 0);
-	public Vector3 fsPosRun = new Vector3(0.5f, 0.75f, 0);
-	public Vector3 fsPosMid2 = new Vector3(0.5f, 0.5f, 0);
-	public Vector3 fsPosEnd = new Vector3(1000f, 500f, 0);
+	[Header("Bezier curve management")]
+	public Transform fsPosMidObject;
+	public Transform fsPosRunObject;
+	public Transform fsPosMid2Object;
+	public Transform fsPosEndObject;
 
+	public Vector3 fsPosMid;
+	public Vector3 fsPosRun;
+	public Vector3 fsPosMid2;
+	public Vector3 fsPosEnd;
+
+	[Header("Card management")]
 	public Deck deck;
 	public TextAsset deckXML;
-
 	public Layout layout;
 	public TextAsset layoutXML;
 	public Vector3 layoutCenter;
@@ -42,6 +50,7 @@ public class Prospector : MonoBehaviour
 	public List<CardProspector> discardPile;
 	public List<CardProspector> drawPile;
 
+	[Header("Score management")]
 	//Fields to track score info
 	public int chain = 0; //of cards in this run
 	public int scoreRun = 0;
@@ -49,7 +58,9 @@ public class Prospector : MonoBehaviour
 	public FloatingScore fsRun;
 	public Text GTGameOver;
 	public Text GTRoundResult;
+	#endregion
 
+	#region Methods
 	void Awake()
 	{
 		S = this; //Prospector singleton
@@ -107,6 +118,12 @@ public class Prospector : MonoBehaviour
 
 		drawPile = ConvertListCardsToListCardProspectors(deck.cards);
 		LayoutGame();
+
+		//Get Bezier curve positions
+		fsPosMid = fsPosMidObject.position;
+		fsPosRun = fsPosRunObject.position;
+		fsPosMid2 = fsPosMid2Object.position;
+		fsPosEnd = fsPosEndObject.position;
 	}
 	
 	List<CardProspector> ConvertListCardsToListCardProspectors(List<Card> lCD)
@@ -499,8 +516,9 @@ public class Prospector : MonoBehaviour
 			ShowResultsGTs(true);
 			break;
 		default: 
-			//print("score: " + score + " scoreRun: " + scoreRun + " chain: " + chain);
+			print("score: " + score + " scoreRun: " + scoreRun + " chain: " + chain);
 			break;
 		}
 	}
+	#endregion
 }

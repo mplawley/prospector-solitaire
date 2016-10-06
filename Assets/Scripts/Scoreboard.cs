@@ -25,7 +25,7 @@ public class Scoreboard : MonoBehaviour
 		set
 		{
 			_score = value;
-			_scoreString = Utils.AddCommasToNumber(_score);
+			scoreString = Utils.AddCommasToNumber(_score);
 		}
 	}
 
